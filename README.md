@@ -32,7 +32,7 @@ use Otomaties\Zenfactuur\GetApiTokenRequest;
 $request = new GetApiTokenRequest();
 $response = $connector->send($request);
 
-if ($response->status() === 200) {
+if ($response->successful()) {
     $data = $response->data();
     echo "Username: " . $data['username'];
 }
@@ -188,69 +188,7 @@ $response = $connector->send($request);
 $invoice = $response->data();
 ```
 
-## Response Handling
-
-All API responses return a response object with the following methods:
-
-```php
-$response = $connector->send($request);
-
-// Get HTTP status code
-$statusCode = $response->status();
-
-// Get response data as array
-$data = $response->data();
-
-// Check if request was successful
-if ($response->status() >= 200 && $response->status() < 300) {
-    // Success
-    $result = $response->data();
-} else {
-    // Handle error
-    echo "Error: " . $response->status();
-}
-```
-
-## Error Handling
-
-```php
-try {
-    $response = $connector->send($request);
-
-    if ($response->status() !== 200) {
-        throw new Exception("API request failed with status: " . $response->status());
-    }
-
-    $data = $response->data();
-    // Process data...
-
-} catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
-}
-```
-
-## Available Request Classes
-
-### Authentication
-
-- `GetApiTokenRequest` - Validate API token and get account info
-
-### Clients
-
-- `GetClientsRequest` - Get all clients (with pagination)
-- `GetClientRequest` - Get single client by ID
-- `CreateClientRequest` - Create a new client
-- `UpdateClientRequest` - Update existing client
-- `FindClientsRequest` - Search clients by query
-
-### Invoices
-
-- `GetInvoicesRequest` - Get all invoices
-- `GetInvoiceRequest` - Get single invoice by ID
-- `GetUnpaidInvoicesRequest` - Get unpaid invoices only
-- `CreateInvoiceRequest` - Create a new invoice
-
-### Pagination
+## Pagination
 
 For endpoints that support pagination (like `GetClientsRequest`), you can specify the page:
 
