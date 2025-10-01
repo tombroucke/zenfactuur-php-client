@@ -1,35 +1,38 @@
 {
-    "name": "tombroucke/zenfactuur-php-client",
-    "description": "Consume the Zenfactuur API",
-    "type": "library",
-    "require": {
-        "fansipan/fansipan": "^1.4",
-        "guzzlehttp/guzzle": "^7.10"
-    },
-    "autoload-dev": {
-        "classmap": [
-            "tests"
-        ]
-    },
-    "autoload": {
-        "psr-4": {
-            "Otomaties\\Zenfactuur\\": "app/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Tom Broucke",
-            "email": "tom@tombroucke.be"
-        }
-    ],
-    "config": {
-        "allow-plugins": {
-            "php-http/discovery": true,
-            "pestphp/pest-plugin": true
-        }
-    },
-    "require-dev": {
-        "pestphp/pest": "^4.1",
-        "vlucas/phpdotenv": "^5.6"
+  "name": "tombroucke/zenfactuur-php-client",
+  "description": "Consume the Zenfactuur API",
+  "type": "library",
+  "require": {
+    "fansipan/fansipan": "^1.4",
+    "guzzlehttp/guzzle": "^7.10"
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests"
+    ]
+  },
+  "autoload": {
+    "psr-4": {
+      "Otomaties\\Zenfactuur\\": "app/"
     }
+  },
+  "authors": [
+    {
+      "name": "Tom Broucke",
+      "email": "tom@tombroucke.be"
+    }
+  ],
+  "config": {
+    "allow-plugins": {
+      "php-http/discovery": true,
+      "pestphp/pest-plugin": true
+    }
+  },
+  "require-dev": {
+    "pestphp/pest": "^4.1",
+    "vlucas/phpdotenv": "^5.6"
+  },
+  "scripts": {
+    "test": "./vendor/bin/pest"
+  }
 }
