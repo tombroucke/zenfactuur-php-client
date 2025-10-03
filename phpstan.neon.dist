@@ -1,0 +1,6 @@
+#$ vendor/bin/phpstan analyze
+
+parameters:
+	level: 5
+	paths:
+		- app

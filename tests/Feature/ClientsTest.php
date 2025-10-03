@@ -8,7 +8,7 @@ use Otomaties\Zenfactuur\ZenfactuurConnector;
 
 test('get clients', function () {
     $connector = new ZenfactuurConnector(
-        token: $_ENV['ZENFACTUUR_TOKEN'] ?? null,
+        token: $_ENV['ZENFACTUUR_API_TOKEN'] ?? null,
     );
 
     // Page 1
@@ -31,7 +31,7 @@ test('get clients', function () {
 
 test('create clients', function () {
     $connector = new ZenfactuurConnector(
-        token: $_ENV['ZENFACTUUR_TOKEN'] ?? null,
+        token: $_ENV['ZENFACTUUR_API_TOKEN'] ?? null,
     );
     $request = new CreateClientRequest([
         'type_id' => 0,
@@ -48,7 +48,7 @@ test('create clients', function () {
 
 test('find clients', function () {
     $connector = new ZenfactuurConnector(
-        token: $_ENV['ZENFACTUUR_TOKEN'] ?? null,
+        token: $_ENV['ZENFACTUUR_API_TOKEN'] ?? null,
     );
     $request = new FindClientsRequest(query: 'Test Client');
     $response = $connector->send($request);
@@ -59,7 +59,7 @@ test('find clients', function () {
 
 test('update clients', function () {
     $connector = new ZenfactuurConnector(
-        token: $_ENV['ZENFACTUUR_TOKEN'] ?? null,
+        token: $_ENV['ZENFACTUUR_API_TOKEN'] ?? null,
     );
     $request = new FindClientsRequest(query: 'Test Client');
     $response = $connector->send($request);

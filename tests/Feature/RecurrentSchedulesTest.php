@@ -6,7 +6,7 @@ use Otomaties\Zenfactuur\ZenfactuurConnector;
 
 test('get recurrent schedules', function () {
     $connector = new ZenfactuurConnector(
-        token: $_ENV['ZENFACTUUR_TOKEN'] ?? null,
+        token: $_ENV['ZENFACTUUR_API_TOKEN'] ?? null,
     );
     $request = new GetRecurrentSchedulesRequest;
     $response = $connector->send($request);
@@ -17,7 +17,7 @@ test('get recurrent schedules', function () {
 
 test('get recurrent schedule', function () {
     $connector = new ZenfactuurConnector(
-        token: $_ENV['ZENFACTUUR_TOKEN'] ?? null,
+        token: $_ENV['ZENFACTUUR_API_TOKEN'] ?? null,
     );
     $request = new GetRecurrentScheduleRequest(5362);
     $response = $connector->send($request);

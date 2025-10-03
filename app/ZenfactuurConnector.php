@@ -16,6 +16,9 @@ final class ZenfactuurConnector implements ConnectorInterface
         //
     }
 
+    /**
+     * @phpstan-ignore-next-line return.unusedType
+     */
     public function baseUri(): ?string
     {
         return rtrim($this->baseUri, '/').'/';

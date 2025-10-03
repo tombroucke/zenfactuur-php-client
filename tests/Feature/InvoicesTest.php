@@ -3,11 +3,13 @@
 use Otomaties\Zenfactuur\Invoices\CreateInvoiceRequest;
 use Otomaties\Zenfactuur\Invoices\GetInvoiceRequest;
 use Otomaties\Zenfactuur\Invoices\GetInvoicesRequest;
+use Otomaties\Zenfactuur\Invoices\SendByEmailRequest;
+use Otomaties\Zenfactuur\Invoices\SendToPeppolRequest;
 use Otomaties\Zenfactuur\ZenfactuurConnector;
 
 test('get invoices', function () {
     $connector = new ZenfactuurConnector(
-        token: $_ENV['ZENFACTUUR_TOKEN'] ?? null,
+        token: $_ENV['ZENFACTUUR_API_TOKEN'] ?? null,
     );
     $request = new GetInvoicesRequest;
     $response = $connector->send($request);
@@ -18,7 +20,7 @@ test('get invoices', function () {
 
 test('create invoice', function () {
     $connector = new ZenfactuurConnector(
-        token: $_ENV['ZENFACTUUR_TOKEN'] ?? null,
+        token: $_ENV['ZENFACTUUR_API_TOKEN'] ?? null,
     );
     $request = new CreateInvoiceRequest([
         'client' => [
@@ -52,9 +54,32 @@ test('create invoice', function () {
 
 test('get invoice', function () {
     $connector = new ZenfactuurConnector(
-        token: $_ENV['ZENFACTUUR_TOKEN'] ?? null,
+        token: $_ENV['ZENFACTUUR_API_TOKEN'] ?? null,
     );
     $request = new GetInvoiceRequest(1944398);
+    $response = $connector->send($request);
+
+    expect($response->status())->toBe(200);
+    expect($response->data())->toBeArray();
+});
+
+test('send to peppol', function () {
+    $connector = new ZenfactuurConnector(
+        token: $_ENV['ZENFACTUUR_API_TOKEN'] ?? null,
+    );
+    $request = new SendToPeppolRequest(1944398);
+    $response = $connector->send($request);
+
+    expect($response->status())->toBe(200);
+    expect($response->data())->toBeArray();
+});
+
+test('send invoice by email', function () {
+    $connector = new ZenfactuurConnector(
+        token: $_ENV['ZENFACTUUR_API_TOKEN'] ?? null,
+    );
+    $request = new SendByEmailRequest(1944398, $_ENV['EMAIL_TO']);
+    // $request->attachPdf(true);
     $response = $connector->send($request);
 
     expect($response->status())->toBe(200);

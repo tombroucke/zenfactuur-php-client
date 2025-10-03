@@ -5,7 +5,7 @@ use Otomaties\Zenfactuur\ZenfactuurConnector;
 
 test('api token retrieval', function () {
     $connector = new ZenfactuurConnector(
-        token: $_ENV['ZENFACTUUR_TOKEN'] ?? null,
+        token: $_ENV['ZENFACTUUR_API_TOKEN'] ?? null,
     );
     $request = new GetApiTokenRequest;
     $response = $connector->send($request);

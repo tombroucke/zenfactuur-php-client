@@ -188,6 +188,81 @@ $response = $connector->send($request);
 $invoice = $response->data();
 ```
 
+### Send Invoice by Email
+
+Send an invoice to a recipient via email with optional attachments and customization:
+
+```php
+use Otomaties\Zenfactuur\Invoices\SendByEmailRequest;
+
+$invoiceId = 123456;
+$recipientEmail = 'client@example.com';
+
+$request = new SendByEmailRequest($invoiceId, $recipientEmail);
+
+// Optional: Add CC recipients
+$request->cc('manager@example.com');
+
+// Optional: Add BCC recipients
+$request->bcc('accounting@example.com');
+
+// Optional: Customize subject
+$request->subject('Your Invoice from Company Name');
+
+// Optional: Add custom email content
+$request->content('Dear Client, please find your invoice attached. Thank you for your business!');
+
+// Optional: Attach PDF version (default: true)
+$request->attachPdf(true);
+
+// Optional: Attach XML version (default: false)
+$request->attachXml(true);
+
+// Optional: Send reminder notification (default: false)
+$request->sendReminder(true);
+
+$response = $connector->send($request);
+
+if ($response->successful()) {
+    echo "Invoice sent successfully!";
+}
+```
+
+#### Basic Email Send
+
+For a simple email send with default settings:
+
+```php
+use Otomaties\Zenfactuur\Invoices\SendByEmailRequest;
+
+$request = new SendByEmailRequest(123456, 'client@example.com');
+$response = $connector->send($request);
+```
+
+### Send Invoice to Peppol
+
+Send an invoice via the Peppol network for B2B electronic invoicing:
+
+```php
+use Otomaties\Zenfactuur\Invoices\SendToPeppolRequest;
+
+$invoiceId = 123456;
+$request = new SendToPeppolRequest($invoiceId);
+$response = $connector->send($request);
+
+if ($response->successful()) {
+    echo "Invoice sent to Peppol network successfully!";
+    $data = $response->data();
+    // Handle response data as needed
+}
+```
+
+**Note:** Peppol sending requires:
+
+-   The client to have a valid Peppol participant ID
+-   The invoice to be in a valid format for Peppol transmission
+-   Your Zenfactuur account to have Peppol integration enabled
+
 ## Pagination
 
 For endpoints that support pagination (like `GetClientsRequest`), you can specify the page:
@@ -209,9 +284,9 @@ The package includes comprehensive tests for all API endpoints. Make sure to set
 
 ## Requirements
 
-- PHP 8.0 or higher
-- Guzzle HTTP client
-- Fansipan HTTP client library
+-   PHP 8.0 or higher
+-   Guzzle HTTP client
+-   Fansipan HTTP client library
 
 ## License
 
