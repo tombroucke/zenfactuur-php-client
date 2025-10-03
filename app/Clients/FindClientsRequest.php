@@ -9,7 +9,9 @@ final class FindClientsRequest extends PaginatedRequest
 {
     use AsJson;
 
-    public function __construct(private string $query, private ?string $phone = null)
+    private ?string $phone = null;
+
+    public function __construct(private string $query)
     {
         //
     }
@@ -28,5 +30,12 @@ final class FindClientsRequest extends PaginatedRequest
         ];
 
         return array_filter($query);
+    }
+
+    public function phone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
     }
 }
